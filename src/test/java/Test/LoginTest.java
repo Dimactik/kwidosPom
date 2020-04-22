@@ -1,6 +1,8 @@
 package Test;
 
-import org.openqa.selenium.By;
+import Page.LoginPage;
+import Page.MainPage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -9,16 +11,22 @@ public class LoginTest extends BaseTest {
 
     String contractorsUrl = "https://kwidos.tk/contractor/search";
 
+    public LoginTest(WebDriver driver) {
+        super(driver);
+    }
+
     @Test
-    public void loginSuccess() throws InterruptedException {
+    public void loginSuccess(){
 
-        loginPage.openBrowser();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("email")));
-       loginPage.enterEmail("ccqyzdtryugrspfddo@awdrt.com");
-       loginPage.enterPassword("Qwerty12");
-       loginPage.clickSignInButton();
+        LoginPage loginPage = new LoginPage(driver);
+        MainPage mainPage = new MainPage(driver);
 
-       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(mainPage.contractors)));
+        loginPage.openBrowser()
+       .enterEmail("ccqyzdtryugrspfddo@awdrt.com")
+       .enterPassword("Qwerty12")
+       .clickSignInButton();
+
+       wait.until(ExpectedConditions.visibilityOfAllElements(mainPage.contractors));
 
        mainPage.contractorsClick();
 

@@ -17,7 +17,7 @@ public class OffersPage extends BaseTest {
 
 
     public OffersPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
     }
 
     public void openBrowser(){

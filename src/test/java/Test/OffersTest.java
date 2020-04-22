@@ -1,14 +1,24 @@
 package Test;
 
+import Page.OffersPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class OffersTest extends BaseTest {
 
+
+
+    public OffersTest(WebDriver driver){
+        super(driver);
+    }
+
     @Test
     public void selecting3DCapture() {
+
+        OffersPage offersPage = new OffersPage(driver);
 
         offersPage.openBrowser();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(offersPage.serviceTypeMenu)));

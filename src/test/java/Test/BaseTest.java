@@ -1,22 +1,22 @@
 package Test;
 
-import Page.LoginPage;
-import Page.MainPage;
-import Page.OffersPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
     public WebDriver driver;
-    public LoginPage loginPage;
-    public MainPage mainPage;
-    public OffersPage offersPage;
     public WebDriverWait wait;
+
+    public BaseTest(WebDriver driver){
+        this.driver = driver;
+        wait = new WebDriverWait(driver, 4);
+        PageFactory.initElements(driver, this);
+    }
 
     @BeforeMethod
     public void browserSetup(){
@@ -25,11 +25,11 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
 
-        wait = new WebDriverWait(driver, 4);
 
-        loginPage = new LoginPage(driver);
-        mainPage = new MainPage(driver);
-        offersPage = new OffersPage(driver);
+
+//        loginPage = new LoginPage(driver);
+//        mainPage = new MainPage(driver);
+//        offersPage = new OffersPage(driver);
 
     }
 
@@ -37,4 +37,5 @@ public class BaseTest {
     public void browserQuit(){
         driver.quit();
     }
+
 }

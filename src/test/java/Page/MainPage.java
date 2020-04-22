@@ -1,23 +1,29 @@
 package Page;
 
 import Test.BaseTest;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.FindBy;
+
+
 
 public class MainPage extends BaseTest {
 
-   public String contractors = "//p[contains(text(), 'CONTRACTORS')]";
+
+    @FindBy(xpath = "//p[contains(text(), 'CONTRACTORS')]")
+    public WebElement contractors;
+
+   //public String contractors = "//p[contains(text(), 'CONTRACTORS')]";
     public String myOffers = "[href='/offer/myOffers']";
 
     public MainPage(WebDriver driver){
-        this.driver=driver;
+        super(driver);
     }
 
 
-    public void contractorsClick(){
-       driver.findElement(By.xpath(contractors)).click();
+    public MainPage contractorsClick(){
+        contractors.click();
+        return this;
     }
 
 
